@@ -1,0 +1,1 @@
+void motor_out(unsigned char rec);

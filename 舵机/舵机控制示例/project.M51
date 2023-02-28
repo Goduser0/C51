@@ -1,0 +1,164 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/14/2022  20:30:18  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL5\C51\BIN\BL51.EXE main.obj, timer0.obj, Delay.obj TO project RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  timer0.obj (TIMER0)
+  Delay.obj (DELAY)
+  D:\KEIL5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  project (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0007H     UNIT         ?C_INITSEG
+                    000AH     0001H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    009AH     0037H     UNIT         ?PR?MAIN?MAIN
+            CODE    00D1H     002BH     UNIT         ?PR?TIMER0?MAIN
+            CODE    00FCH     0015H     UNIT         ?PR?TIMER0_INIT?TIMER0
+            CODE    0111H     0015H     UNIT         ?PR?_DELAY?DELAY
+
+
+
+OVERLAY MAP OF MODULE:   project (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?TIMER0
+  +--> ?PR?_DELAY?DELAY
+
+
+
+SYMBOL TABLE OF MODULE:  project (MAIN)
+
+  VALUE           TYPE          NAME
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/14/2022  20:30:18  PAGE 2
+
+
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0008H         PUBLIC        PWM_count
+  D:00A0H         PUBLIC        P2
+  C:009AH         PUBLIC        main
+  D:0009H         PUBLIC        count
+  C:00D1H         PUBLIC        Timer0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:00A0H.0       PUBLIC        SG_PWM
+  -------         PROC          MAIN
+  C:009AH         LINE#         18
+  C:009AH         LINE#         19
+  C:009AH         LINE#         20
+  C:009DH         LINE#         21
+  C:009DH         LINE#         22
+  C:009DH         LINE#         23
+  C:00A0H         LINE#         24
+  C:00A7H         LINE#         25
+  C:00AAH         LINE#         26
+  C:00B1H         LINE#         27
+  C:00B4H         LINE#         28
+  C:00BBH         LINE#         29
+  C:00BEH         LINE#         30
+  C:00C5H         LINE#         31
+  C:00C8H         LINE#         32
+  C:00CFH         LINE#         33
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0
+  C:00D1H         LINE#         36
+  C:00D7H         LINE#         39
+  C:00DAH         LINE#         40
+  C:00DDH         LINE#         42
+  C:00DFH         LINE#         43
+  C:00E8H         LINE#         45
+  C:00EFH         LINE#         46
+  C:00EFH         LINE#         47
+  C:00F1H         LINE#         48
+  C:00F3H         LINE#         50
+  C:00F3H         LINE#         51
+  C:00F5H         LINE#         52
+  C:00F5H         LINE#         53
+  -------         ENDPROC       TIMER0
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        TIMER0
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A8H.7       PUBLIC        EA
+  C:00FCH         PUBLIC        Timer0_Init
+  D:0089H         PUBLIC        TMOD
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.5       PUBLIC        TF0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/14/2022  20:30:18  PAGE 3
+
+
+  -------         PROC          TIMER0_INIT
+  C:00FCH         LINE#         3
+  C:00FCH         LINE#         4
+  C:00FCH         LINE#         5
+  C:00FFH         LINE#         6
+  C:0102H         LINE#         7
+  C:0105H         LINE#         8
+  C:0108H         LINE#         9
+  C:010AH         LINE#         10
+  C:010CH         LINE#         11
+  C:010EH         LINE#         12
+  C:0110H         LINE#         13
+  -------         ENDPROC       TIMER0_INIT
+  -------         ENDMOD        TIMER0
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0111H         PUBLIC        _Delay
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        xms
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0111H         LINE#         3
+  C:0111H         LINE#         4
+  C:0111H         LINE#         6
+  C:011BH         LINE#         7
+  C:011BH         LINE#         8
+  C:011DH         LINE#         9
+  C:011FH         LINE#         11
+  C:011FH         LINE#         12
+  C:0121H         LINE#         13
+  C:0123H         LINE#         14
+  C:0125H         LINE#         15
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        DELAY
+
+Program Size: data=11.0 xdata=0 code=293
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

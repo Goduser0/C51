@@ -1,0 +1,99 @@
+C51 COMPILER V9.01   MAIN                                                                  02/25/2022 11:46:22 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE main.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #include "delay.h"
+   3          #include "exit_set.h"
+   4          
+   5          typedef unsigned int u16;
+   6          typedef unsigned char u8;
+   7          
+   8          sbit PWM = P2^0;
+   9          sbit angle0 = P1^0;
+  10          sbit angle45 = P1^1;
+  11          sbit angle90 = P1^2;
+  12          sbit angle135 = P1^3;
+  13          sbit angle180 = P1^4;
+  14          
+  15          u8 change=2,i=39;
+  16          
+  17          void main()
+  18          {
+  19   1              T0_set(1);      
+  20   1              while(1)
+  21   1              {
+  22   2                      if(angle0==0||angle45==0||angle90==0||angle135==0||angle180==0)                                         
+             -                                                                              
+  23   2                      {
+  24   3                              delay_10us(100);
+  25   3                              if(angle0==0)
+  26   3                              {
+  27   4                                      change = 0;
+  28   4                                      i=39;                           
+  29   4                                      T0_set(1);
+  30   4                              }
+  31   3                              else if(angle45==0)
+  32   3                              {
+  33   4                                      
+  34   4                                      change = 1;
+  35   4                                      i=39;
+  36   4                                      T0_set(1);
+  37   4                              }
+  38   3                              else if(angle90==0)
+  39   3                              {
+  40   4                                      
+  41   4                                      change = 2;
+  42   4                                      i=39;
+  43   4                                      T0_set(1);
+  44   4                              }
+  45   3                              else if(angle135==0)
+  46   3                              {
+  47   4                                      
+  48   4                                      change = 3;
+  49   4                                      i=39;
+  50   4                                      T0_set(1);
+  51   4                              }
+  52   3                              else if(angle180==0)
+  53   3                              {
+  54   4                                      change = 4;
+C51 COMPILER V9.01   MAIN                                                                  02/25/2022 11:46:22 PAGE 2   
+
+  55   4                                      i=39;
+  56   4                                      T0_set(1);
+  57   4                              }       
+  58   3                      }
+  59   2                       
+  60   2              }       
+  61   1      }
+  62          
+  63          void PWM_plus() interrupt 1
+  64          {
+  65   1              TH0 = 0XFE;
+  66   1              TL0 = 0X0C;
+  67   1              i++;
+  68   1              i%=40; //i·¶Î§£º0~39   i=0->0.5ms i=1->1.0ms i=2->1.5ms i=3->2.0ms i=4->2.5ms
+  69   1              if(i<=change)
+  70   1              {PWM=1;}
+  71   1              else
+  72   1              {PWM=0;}
+  73   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    132    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

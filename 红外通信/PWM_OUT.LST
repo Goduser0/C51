@@ -1,0 +1,56 @@
+C51 COMPILER V9.01   PWM_OUT                                                               03/13/2022 22:42:54 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE PWM_OUT
+OBJECT MODULE PLACED IN PWM_OUT.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE PWM_OUT.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #include "delay.h"
+   3          #include "interrupt_set.h"
+   4          
+   5          sbit PWM_eye_L = P2^0;
+   6          sbit PWM_eye_R = P2^1;
+   7          
+   8          unsigned char change_eye_l=4,change_eye_r=4,i=39;
+   9          
+  10          void pwm_send(unsigned char angle)
+  11          {                       
+  12   1              switch(angle)
+  13   1              {
+  14   2                      case 0:if(change_eye_l>0){change_eye_l-=1;};break;
+  15   2                      case 1:if(change_eye_l<9){change_eye_l+=1;};break;
+  16   2                      case 2:if(change_eye_r>0){change_eye_r-=1;};break;
+  17   2                      case 3:if(change_eye_r<9){change_eye_r+=1;};break;
+  18   2              }
+  19   1              i=79;T0_set(1);         
+  20   1      }
+  21          
+  22          //ÓĞĞ§Âö³å·¶Î§£º0.5ms-2.5ms
+  23          void PWM_plus() interrupt 1
+  24          {
+  25   1              TH0 = 0XFF;
+  26   1              TL0 = 0X06;
+  27   1              i++;
+  28   1              i%=80; //i·¶Î§£º0~39   i=0->0.5ms i=1->1.0ms i=2->1.5ms i=3->2.0ms i=4->2.5ms
+  29   1              if (i<=change_eye_l){PWM_eye_L=1;} 
+  30   1              else {PWM_eye_L=0;}
+  31   1              if (i<=change_eye_r){PWM_eye_R=1;}
+  32   1              else {PWM_eye_R=0;}     
+  33   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    120    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

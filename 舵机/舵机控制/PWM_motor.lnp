@@ -1,0 +1,5 @@
+"main.obj",
+"delay.obj",
+"exit_set.obj" 
+TO "PWM_motor" 
+RAMSIZE(256) 

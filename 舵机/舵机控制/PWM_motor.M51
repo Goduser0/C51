@@ -1,0 +1,253 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/25/2022  11:46:22  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE main.obj, delay.obj, exit_set.obj TO PWM_motor RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  delay.obj (DELAY)
+  exit_set.obj (EXIT_SET)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  PWM_motor (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+                    000AH     0016H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         _BIT_GROUP_
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0007H     UNIT         ?C_INITSEG
+                    000AH     0001H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    009AH     0059H     UNIT         ?PR?MAIN?MAIN
+            CODE    00F3H     002BH     UNIT         ?PR?PWM_PLUS?MAIN
+            CODE    011EH     0012H     UNIT         ?PR?T0_SET?EXIT_SET
+            CODE    0130H     000FH     UNIT         ?PR?T1_SET?EXIT_SET
+            CODE    013FH     000BH     UNIT         ?PR?_DELAY_10US?DELAY
+            CODE    014AH     0007H     UNIT         ?PR?INT0_SET?EXIT_SET
+            CODE    0151H     0007H     UNIT         ?PR?INT1_SET?EXIT_SET
+
+
+
+OVERLAY MAP OF MODULE:   PWM_motor (MAIN)
+
+
+SEGMENT                           BIT_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                  -----    -----
+  +--> ?PR?_DELAY_10US?DELAY
+  +--> ?PR?T0_SET?EXIT_SET
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/25/2022  11:46:22  PAGE 2
+
+
+
+?PR?T0_SET?EXIT_SET            0020H.0  0000H.1
+
+
+
+SYMBOL TABLE OF MODULE:  PWM_motor (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:00F3H         PUBLIC        PWM_plus
+  B:0090H.4       PUBLIC        angle180
+  B:0090H.3       PUBLIC        angle135
+  C:009AH         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  B:0090H.0       PUBLIC        angle0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  D:00C8H         PUBLIC        T2CON
+  D:0008H         PUBLIC        i
+  D:0009H         PUBLIC        change
+  B:0090H.2       PUBLIC        angle90
+  B:0090H.1       PUBLIC        angle45
+  B:00A0H.0       PUBLIC        PWM
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:009AH         LINE#         17
+  C:009AH         LINE#         18
+  C:009AH         LINE#         19
+  C:009CH         LINE#         20
+  C:009CH         LINE#         21
+  C:009CH         LINE#         22
+  C:00ABH         LINE#         23
+  C:00ABH         LINE#         24
+  C:00B2H         LINE#         25
+  C:00B5H         LINE#         26
+  C:00B5H         LINE#         27
+  C:00B8H         LINE#         28
+  C:00BBH         LINE#         29
+  C:00BBH         LINE#         30
+  C:00BDH         LINE#         31
+  C:00C0H         LINE#         32
+  C:00C0H         LINE#         34
+  C:00C3H         LINE#         35
+  C:00C6H         LINE#         36
+  C:00C6H         LINE#         37
+  C:00C8H         LINE#         38
+  C:00CBH         LINE#         39
+  C:00CBH         LINE#         41
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/25/2022  11:46:22  PAGE 3
+
+
+  C:00CEH         LINE#         42
+  C:00D1H         LINE#         43
+  C:00D1H         LINE#         44
+  C:00D3H         LINE#         45
+  C:00D6H         LINE#         46
+  C:00D6H         LINE#         48
+  C:00D9H         LINE#         49
+  C:00DCH         LINE#         50
+  C:00E1H         LINE#         51
+  C:00E3H         LINE#         52
+  C:00E6H         LINE#         53
+  C:00E6H         LINE#         54
+  C:00E9H         LINE#         55
+  C:00ECH         LINE#         56
+  C:00F1H         LINE#         57
+  C:00F1H         LINE#         58
+  C:00F1H         LINE#         60
+  -------         ENDPROC       MAIN
+  -------         PROC          PWM_PLUS
+  C:00F3H         LINE#         63
+  C:00F9H         LINE#         65
+  C:00FCH         LINE#         66
+  C:00FFH         LINE#         67
+  C:0101H         LINE#         68
+  C:010AH         LINE#         69
+  C:0111H         LINE#         70
+  C:0115H         LINE#         72
+  C:0117H         LINE#         73
+  -------         ENDPROC       PWM_PLUS
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:013FH         PUBLIC        _delay_10us
+  -------         PROC          _DELAY_10US
+  D:0006H         SYMBOL        ten_us
+  C:013FH         LINE#         1
+  C:013FH         LINE#         2
+  C:013FH         LINE#         3
+  C:0149H         LINE#         4
+  -------         ENDPROC       _DELAY_10US
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        EXIT_SET
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:011EH         PUBLIC        T0_set
+  C:0130H         PUBLIC        T1_set
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  B:00A8H.1       PUBLIC        ET0
+  C:014AH         PUBLIC        INT0_set
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/25/2022  11:46:22  PAGE 4
+
+
+  B:00A8H.3       PUBLIC        ET1
+  C:0151H         PUBLIC        INT1_set
+  D:008CH         PUBLIC        TH0
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  D:008DH         PUBLIC        TH1
+  B:00A8H.2       PUBLIC        EX1
+  B:0088H.2       PUBLIC        IT1
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  B:0088H.4       PUBLIC        TR0
+  B:0088H.6       PUBLIC        TR1
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          INT0_SET
+  C:014AH         LINE#         4
+  C:014AH         LINE#         5
+  C:014AH         LINE#         6
+  C:014CH         LINE#         7
+  C:014EH         LINE#         8
+  C:0150H         LINE#         9
+  -------         ENDPROC       INT0_SET
+  -------         PROC          INT1_SET
+  C:0151H         LINE#         12
+  C:0151H         LINE#         13
+  C:0151H         LINE#         14
+  C:0153H         LINE#         15
+  C:0155H         LINE#         16
+  C:0157H         LINE#         17
+  -------         ENDPROC       INT1_SET
+  -------         PROC          T0_SET
+  B:0020H.0       SYMBOL        T0
+  C:011EH         LINE#         20
+  C:011EH         LINE#         21
+  C:011EH         LINE#         23
+  C:0121H         LINE#         25
+  C:0124H         LINE#         26
+  C:0127H         LINE#         28
+  C:012BH         LINE#         29
+  C:012DH         LINE#         30
+  C:012FH         LINE#         31
+  -------         ENDPROC       T0_SET
+  -------         PROC          T1_SET
+  C:0130H         LINE#         34
+  C:0130H         LINE#         35
+  C:0130H         LINE#         37
+  C:0133H         LINE#         39
+  C:0136H         LINE#         40
+  C:0138H         LINE#         42
+  C:013AH         LINE#         43
+  C:013CH         LINE#         44
+  C:013EH         LINE#         45
+  -------         ENDPROC       T1_SET
+  -------         ENDMOD        EXIT_SET
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?INT0_SET?EXIT_SET
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/25/2022  11:46:22  PAGE 5
+
+
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?INT1_SET?EXIT_SET
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?T1_SET?EXIT_SET
+
+Program Size: data=11.1 xdata=0 code=343
+LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)

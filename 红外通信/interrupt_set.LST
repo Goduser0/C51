@@ -1,0 +1,70 @@
+C51 COMPILER V9.01   INTERRUPT_SET                                                         03/13/2022 22:42:54 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE INTERRUPT_SET
+OBJECT MODULE PLACED IN interrupt_set.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE interrupt_set.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"
+   2          
+   3          //外部中断0设定, 管脚P3.2
+   4          void INT0_set()
+   5          {
+   6   1              IT0 = 1; //设定为低电平触发
+   7   1              EX0 = 1;
+   8   1              EA = 1;   
+   9   1      }
+  10          
+  11          //外部中断1设定，管脚P3.3
+  12          void INT1_set()
+  13          {
+  14   1              IT1 = 0; //设定为低电平触发
+  15   1              EX1 = 1;
+  16   1              EA = 1; 
+  17   1      }
+  18          
+  19          //计时器0中断设定
+  20          void T0_set(bit T0)//T0==1开始工作，T0==0停止工作
+  21          {
+  22   1              //计时模式；方式1
+  23   1              TMOD |= 0X01;
+  24   1              //初值设定
+  25   1              TH0 = 0XFE;
+  26   1              TL0 = 0X0C;
+  27   1      
+  28   1              TR0 = T0;
+  29   1              ET0 = 1;
+  30   1              EA = 1;
+  31   1      }
+  32          
+  33          //计时器1中断设定
+  34          void T1_set(bit T1)
+  35          {
+  36   1              //计时模式；方式1
+  37   1              TMOD |= 0X10;
+  38   1          //初值设定
+  39   1              TH1 = 0X00;
+  40   1              TL1 = 0X00;
+  41   1      
+  42   1              TR1 = T1;
+  43   1              ET1 = 1;
+  44   1              EA = 1;
+  45   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     49    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       2
+C51 COMPILER V9.01   INTERRUPT_SET                                                         03/13/2022 22:42:54 PAGE 2   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,7 @@
+"main.obj",
+"interrupt_set.obj",
+"delay.obj",
+"PWM_OUT.obj",
+"motor.obj" 
+TO "∫ÏÕ‚Õ®–≈" 
+RAMSIZE(256) 
