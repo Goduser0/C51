@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\buzzer.obj" 
+TO ".\Objects\Template_C51" 
+PRINT(".\Listings\Template_C51.m51") RAMSIZE(256) 
