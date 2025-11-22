@@ -1,0 +1,136 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              08/15/2025 01:42:06 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\KeilC51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "reg52.h"
+   2          typedef unsigned int u16;
+   3          typedef unsigned char u8;
+   4          
+   5          #define SMG_PORT P0
+   6          #define BUTTON P2
+   7          
+   8          u8 psmg_code[17] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90, 0x88, 0x83, 0xC6, 0xA1, 0x
+             -86, 0x8E, 0xFF};      
+   9          
+  10          void delay_10us(u16 time)
+  11          {
+  12   1              while(time--);
+  13   1      }
+  14          
+  15          int single_button_scan()
+  16          {
+  17   1              static single_key_value=0;
+  18   1              single_key_value=0;
+  19   1              BUTTON = 0xff;
+  20   1              
+  21   1              if(BUTTON != 0xff)
+  22   1              {
+  23   2                      delay_10us(1000);
+  24   2                      if(BUTTON != 0xff)
+  25   2                      {
+  26   3                              switch(BUTTON)
+  27   3                              {
+  28   4                                      case 0x7f: single_key_value=1; break;
+  29   4                                      case 0xbf: single_key_value=2; break;
+  30   4                                      case 0xdf: single_key_value=3; break;
+  31   4                                      case 0xef: single_key_value=4; break;
+  32   4                                      case 0xf7: single_key_value=5; break;
+  33   4                                      case 0xfb: single_key_value=6; break;
+  34   4                                      case 0xfd: single_key_value=7; break;
+  35   4                                      case 0xfe: single_key_value=8; break;
+  36   4                              }
+  37   3                      }
+  38   2              }
+  39   1              
+  40   1              return single_key_value;
+  41   1              
+  42   1      }
+  43          
+  44          void single_button_detect()
+  45          {
+  46   1              u8 key;
+  47   1              SMG_PORT = 0x00;
+  48   1              while(1)
+  49   1              {
+  50   2                      key = single_button_scan();
+  51   2                      SMG_PORT = psmg_code[key];
+  52   2              }
+  53   1      }
+C51 COMPILER V9.60.7.0   MAIN                                                              08/15/2025 01:42:06 PAGE 2   
+
+  54          
+  55          int matrix_button_scan()
+  56          {
+  57   1              static key_value = 0;
+  58   1              u8 temp_1, temp_2;
+  59   1              
+  60   1              BUTTON = 0x0f;
+  61   1              if(BUTTON != 0x0f)
+  62   1              {
+  63   2                      delay_10us(1000);
+  64   2                      if(BUTTON != 0x0f)
+  65   2                      {
+  66   3                              temp_1 = BUTTON;
+  67   3                              BUTTON = 0xf0;
+  68   3                              temp_2  =BUTTON;
+  69   3                              
+  70   3                              switch(temp_1)
+  71   3                              {
+  72   4                                      case 0x07: key_value=1;break;
+  73   4                                      case 0x0b: key_value=2;break;
+  74   4                                      case 0x0d: key_value=3;break;
+  75   4                                      case 0x0e: key_value=4;break;
+  76   4                              }
+  77   3                              switch(temp_2)
+  78   3                              {
+  79   4                                      case 0x70: key_value=key_value + 0*4;break;
+  80   4                                      case 0xb0: key_value=key_value + 1*4;break;
+  81   4                                      case 0xd0: key_value=key_value + 2*4;break;
+  82   4                                      case 0xe0: key_value=key_value + 3*4;break;
+  83   4                              }
+  84   3                      }
+  85   2              }
+  86   1              
+  87   1              
+  88   1              return key_value;
+  89   1      }
+  90          
+  91          void matrix_button_detect()
+  92          {
+  93   1              u8 key;
+  94   1              SMG_PORT = 0xff;
+  95   1              while(1)
+  96   1              {
+  97   2                      key = matrix_button_scan();
+  98   2                      SMG_PORT = psmg_code[key];
+  99   2              }
+ 100   1      }
+ 101          
+ 102          
+ 103          void main()
+ 104          {
+ 105   1      //      single_button_detect();
+ 106   1              matrix_button_detect();
+ 107   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    288    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     21    ----
+C51 COMPILER V9.60.7.0   MAIN                                                              08/15/2025 01:42:06 PAGE 3   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
