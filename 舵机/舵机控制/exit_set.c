@@ -7,7 +7,7 @@ void INT0_set()
 	EX0 = 1;
 	EA = 1;   
 }
-
+//
 //外部中断1设定，管脚P3.3
 void INT1_set()
 {
@@ -15,7 +15,7 @@ void INT1_set()
 	EX1 = 1;
 	EA = 1;	
 }
-
+//
 //计时器0中断设定
 void T0_set(bit T0)//T0==1开始工作，T0==0停止工作
 {
@@ -23,29 +23,23 @@ void T0_set(bit T0)//T0==1开始工作，T0==0停止工作
 	TMOD |= 0X01;
 	//初值设定
 	TH0 = 0XFF;
-	TL0 = 0X9C;
+	TL0 = 0X00;
 
 	TR0 = T0;
 	ET0 = 1;
 	EA = 1;
 }
-
+//
 //计时器1中断设定
-void T1_set()
+void T1_set(bit T1)//T1==1开始工作，T1==0停止工作
 {
 	//计时模式；方式1
 	TMOD |= 0X10;
     //初值设定
-	TH1 = 0X00;
+	TH1 = 0XFF;
 	TL1 = 0X00;
 
-	TR1 = 1;
+	TR1 = T1;
 	ET1 = 1;
 	EA = 1;
 }
-
-
-
-
-
-

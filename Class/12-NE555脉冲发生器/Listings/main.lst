@@ -1,0 +1,136 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              11/23/2025 19:03:03 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\KeilC51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #include "intrins.h"
+   3          
+   4          typedef unsigned int u16;
+   5          typedef unsigned char u8;
+   6          
+   7          #define GPIO_DEG P0
+   8          sbit LSA = P2^2;
+   9          sbit LSB = P2^3;
+  10          sbit LSC = P2^4;
+  11          
+  12          u8 SMG[17] = {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+  13          unsigned long freq=0, show_freq=0;
+  14          
+  15          void delay(u16 i)
+  16          {
+  17   1              while(i--);     
+  18   1      }
+  19          
+  20          void DisPlay(u16 outdata)
+  21          {
+  22   1              u8 Display_Data[8];
+  23   1              u8 i;
+  24   1              
+  25   1              Display_Data[0] = SMG[outdata / 10000000];
+  26   1              Display_Data[1] = SMG[outdata%10000000 / 1000000];
+  27   1              Display_Data[2] = SMG[outdata%1000000 / 100000];
+  28   1              Display_Data[3] = SMG[outdata%100000 / 10000];
+  29   1              Display_Data[4] = SMG[outdata%10000 / 1000];
+  30   1              Display_Data[5] = SMG[outdata%1000 / 100];
+  31   1              Display_Data[6] = SMG[outdata%100 / 10];
+  32   1              Display_Data[7] = SMG[outdata%10 / 1];
+  33   1              
+  34   1              for(i=0;i<8;i++)
+  35   1              {
+  36   2                      switch(i)
+  37   2                      {
+  38   3                              case(0): LSA=0;LSB=0;LSC=0;break;
+  39   3                              case(1): LSA=1;LSB=0;LSC=0;break;
+  40   3                              case(2): LSA=0;LSB=1;LSC=0;break;
+  41   3                              case(3): LSA=1;LSB=1;LSC=0;break;
+  42   3                              case(4): LSA=0;LSB=0;LSC=1;break;
+  43   3                              case(5): LSA=1;LSB=0;LSC=1;break;
+  44   3                              case(6): LSA=0;LSB=1;LSC=1;break;
+  45   3                              case(7): LSA=1;LSB=1;LSC=1;break;
+  46   3                      }
+  47   2                      
+  48   2                      GPIO_DEG = Display_Data[i];
+  49   2                      delay(100);
+  50   2                      GPIO_DEG = 0x00;
+  51   2              }
+  52   1      }
+  53          
+  54          void Timer_init()
+C51 COMPILER V9.60.7.0   MAIN                                                              11/23/2025 19:03:03 PAGE 2   
+
+  55          {
+  56   1              TMOD = 0x51;
+  57   1              TH1 = 0x00;
+  58   1              TL1 = 0x00;
+  59   1              TH0 = 0xFC;
+  60   1              TL0 = 0x18;
+  61   1              
+  62   1              ET1= 1;
+  63   1              TR1 = 1;
+  64   1              ET0 =1;
+  65   1              TR0 = 1;
+  66   1              
+  67   1              EA = 1;
+  68   1      }
+  69          
+  70          void Timer0() interrupt 1
+  71          {
+  72   1              static u16 count;
+  73   1              TH0 = 0xFC;
+  74   1              TL0 = 0x18;
+  75   1              count++;
+  76   1              
+  77   1              if(count == 1000)
+  78   1              {
+  79   2                      freq += TL1;
+  80   2                      freq += TH1*256;
+  81   2                      
+  82   2                      if(freq != show_freq)
+  83   2                      {
+  84   3                              show_freq = freq;
+  85   3                      }
+  86   2                      count = 0;
+  87   2                      freq = 0;
+  88   2                      
+  89   2                      TH1 = 0x00;
+  90   2                      TL1 = 0x00;
+  91   2              }
+  92   1      }
+  93          
+  94          void Timer1() interrupt 3
+  95          {
+  96   1              freq += 65536;
+  97   1      }
+  98          
+  99          void main()
+ 100          {
+ 101   1              Timer_init();
+ 102   1              while(1)
+ 103   1              {
+ 104   2                      DisPlay(show_freq);
+ 105   2              }
+ 106   1      }
+ 107          
+ 108          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    636    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     27      10
+C51 COMPILER V9.60.7.0   MAIN                                                              11/23/2025 19:03:03 PAGE 3   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

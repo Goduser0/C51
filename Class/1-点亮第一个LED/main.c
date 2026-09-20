@@ -13,13 +13,13 @@ void delay_10us(u16 ten_us)
 
 void blink()
 {
-	u16 delay_time = 10000;
+	u16 delay_time = 950;
 	while(1)
 	{	
 		LED1 = 1;
 		delay_10us(delay_time);
 		LED1 = 0;
-		delay_10us(delay_time);
+		delay_10us(1000 - delay_time);
 	}
 }
 
@@ -44,6 +44,6 @@ void horse_race_lamp()
 
 void main()
 {
-	//blink();
-	horse_race_lamp();
+	blink();
+//	horse_race_lamp();
 }

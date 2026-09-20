@@ -1,0 +1,119 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/23/2025  15:38:04  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+E:\KEILC51\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\Template_C51 PRINT (.\Listings\Template_C51.m51) RAMSIZE (25
+>> 6)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  E:\KEILC51\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\Template_C51 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0005H     UNIT         ?PR?MAIN?MAIN
+                    0008H     0003H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0027H     UNIT         ?PR?TIMER0?MAIN
+            CODE    0035H     0010H     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    0045H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Template_C51 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?TIMER0_INIT?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Template_C51 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/23/2025  15:38:04  PAGE 2
+
+
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  B:00A0H.0       PUBLIC        LED1
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0003H         PUBLIC        main
+  C:000EH         PUBLIC        Timer0
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  B:00A8H.1       PUBLIC        ET0
+  C:0035H         PUBLIC        Timer0_init
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          TIMER0_INIT
+  C:0035H         LINE#         9
+  C:0035H         LINE#         10
+  C:0035H         LINE#         11
+  C:0038H         LINE#         12
+  C:003BH         LINE#         13
+  C:003EH         LINE#         15
+  C:0040H         LINE#         16
+  C:0042H         LINE#         18
+  C:0044H         LINE#         19
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          TIMER0
+  -------         DO            
+  D:0008H         SYMBOL        count
+  -------         ENDDO         
+  C:000EH         LINE#         21
+  C:0012H         LINE#         25
+  C:0015H         LINE#         26
+  C:0018H         LINE#         27
+  C:0020H         LINE#         29
+  C:0028H         LINE#         30
+  C:0028H         LINE#         31
+  C:002EH         LINE#         32
+  C:0030H         LINE#         33
+  C:0030H         LINE#         34
+  -------         ENDPROC       TIMER0
+  -------         PROC          MAIN
+  C:0003H         LINE#         36
+  C:0003H         LINE#         37
+  C:0003H         LINE#         38
+  C:0006H         LINE#         40
+  C:0006H         LINE#         41
+  C:0006H         LINE#         42
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=11.0 xdata=0 code=78
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

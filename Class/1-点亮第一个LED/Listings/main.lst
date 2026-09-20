@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   MAIN                                                              11/20/2025 23:05:15 PAGE 1   
+C51 COMPILER V9.60.7.0   MAIN                                                              11/24/2025 13:04:09 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
@@ -23,13 +23,13 @@ line level    source
   13          
   14          void blink()
   15          {
-  16   1              u16 delay_time = 10000;
+  16   1              u16 delay_time = 950;
   17   1              while(1)
   18   1              {       
   19   2                      LED1 = 1;
   20   2                      delay_10us(delay_time);
   21   2                      LED1 = 0;
-  22   2                      delay_10us(delay_time);
+  22   2                      delay_10us(1000 - delay_time);
   23   2              }
   24   1      }
   25          
@@ -54,15 +54,15 @@ line level    source
   44          
   45          void main()
   46          {
-  47   1              //blink();
-  48   1              horse_race_lamp();
+  47   1              blink();
+  48   1      //      horse_race_lamp();
   49   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     89    ----
+   CODE SIZE        =     94    ----
    CONSTANT SIZE    =   ----    ----
-C51 COMPILER V9.60.7.0   MAIN                                                              11/20/2025 23:05:15 PAGE 2   
+C51 COMPILER V9.60.7.0   MAIN                                                              11/24/2025 13:04:09 PAGE 2   
 
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
